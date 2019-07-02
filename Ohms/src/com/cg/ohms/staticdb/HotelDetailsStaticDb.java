@@ -18,7 +18,7 @@ public class HotelDetailsStaticDb {
 		return hotelList;
 		}
 		else {
-			throw new HotelException(ExceptionMessages.MESSAGE1);
+			throw new HotelException(ExceptionMessages.EMPTYLIST);
 		}
 	}
 

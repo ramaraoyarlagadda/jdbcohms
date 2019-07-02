@@ -11,13 +11,15 @@ public class Connect {
 		Connection connection=null;
 		if(connection==null) {
 			try {
+				
 				connection=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system","system");
 			} catch (SQLException e) {
-				throw new HotelException(ExceptionMessages.MESSAGE1);
+				throw new HotelException(ExceptionMessages.CONNECTIONERROR);
 			}
 			
 		}
 		return connection;
+		
 	}
 
 }

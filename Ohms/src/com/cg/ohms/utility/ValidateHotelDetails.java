@@ -1,37 +1,34 @@
 package com.cg.ohms.utility;
 
-import com.cg.ohms.exceptions.InValidHotelAddressException;
-import com.cg.ohms.exceptions.InValidHotelIdException;
-import com.cg.ohms.exceptions.InValidHotelNameException;
-import com.cg.ohms.exceptions.InValidNumberOfRoomsException;
+import com.cg.ohms.exceptions.HotelException;
 
 public class ValidateHotelDetails {
 	
-	public boolean isValidHotelId(String hotelId) throws InValidHotelIdException{
+	public boolean isValidHotelId(String hotelId) throws HotelException{
 		
-		if(!hotelId.matches("^[0-9]{2,6}$")) {
-			throw new InValidHotelIdException("Enter numbers upto 5 digits only");
+		if(!hotelId.matches("^[1-9]{2,6}$")) {
+			throw new HotelException(ExceptionMessages.INVALIDHOTELID);
 		}
 		return true;
 	}
-	public boolean isValidHotelName(String hotelName) throws InValidHotelNameException{
+	public boolean isValidHotelName(String hotelName) throws HotelException{
 		if (!hotelName.matches("^[a-zA-Z]*$") || hotelName.isEmpty()) {
-			throw new InValidHotelNameException("Enter Valid Hotel Name in alphabets ");
+			throw new HotelException(ExceptionMessages.INVALIDHOTELNAME);
 		}
 
 		return true;
 
 	}
-	public boolean isValidHotelAddress(String hotelAddress) throws InValidHotelAddressException{
+	public boolean isValidHotelAddress(String hotelAddress) throws HotelException{
 		if (!hotelAddress.matches("^[\\\\$#\\\\+{}:\\\\?\\\\.,~@\\\"a-zA-Z0-9 ]+$") || hotelAddress.isEmpty()) {
-			throw new InValidHotelAddressException("Enter Valid Hotel Address ");
+			throw new HotelException(ExceptionMessages.INVALIDHOTELADDRESS);
 		}
 		return true;
 	}
-	public boolean isValidNumberOfRooms(int numOfRooms) throws InValidNumberOfRoomsException{
+	public boolean isValidNumberOfRooms(int numOfRooms) throws HotelException{
 		String rooms=Integer.toString(numOfRooms);
 		if(!(rooms.matches("[0-9]{1,3}"))||rooms.isEmpty()) {
-			throw new InValidNumberOfRoomsException("Enter Valid Number For Rooms");
+			throw new HotelException(ExceptionMessages.INVALIDNUMBEROFROOMS);
 		}
 		return true;
 	}
