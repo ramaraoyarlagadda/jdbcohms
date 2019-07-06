@@ -6,7 +6,7 @@ public class ValidateHotelDetails {
 	
 	public boolean isValidHotelId(String hotelId) throws HotelException{
 		
-		if(!hotelId.matches("^[1-9]{2,6}$")) {
+		if(!hotelId.matches("[1-9]{1}[0-9]{5}")) {
 			throw new HotelException(ExceptionMessages.INVALIDHOTELID);
 		}
 		return true;

@@ -14,6 +14,7 @@ import com.cg.ohms.utility.Queries;
 public class HotelDetailsDaoImpl implements IHotelDetailsDao {
 	 int check=0;
 	 HotelDetailsDTO hotelDetailsDTO=new HotelDetailsDTO();
+	 PreparedStatement preparedStatement=null;
 	
 	@Override
 	public HotelDetailsDTO viewDetails(String viewId) throws HotelException {
@@ -70,19 +71,17 @@ public class HotelDetailsDaoImpl implements IHotelDetailsDao {
 		Connection connection=Connect.getConnection();
 		String sqlQuery=Queries.MODIFYNAME;
 		try {
-			PreparedStatement preparedStatement=connection.prepareStatement(sqlQuery);
-			System.out.println("-=-=-=-=-==m1");
-			preparedStatement.setString(1, hotelId);
-			System.out.println("-=-=-=-=-==m2");
-			preparedStatement.setString(2, hotelName);
-			System.out.println("-=-=-=-=-==m3");
+			 preparedStatement=connection.prepareStatement(sqlQuery);
+			preparedStatement.setString(1, hotelName);
+			preparedStatement.setString(2, hotelId);
 			check=preparedStatement.executeUpdate();
+			System.out.println(check);
 			if(check==1) {
 				connection.commit();
-				System.out.println("-=-=-=-=-==m4");
 				return true;
 			}
 			preparedStatement.close();
+			
 		} catch (SQLException e) {
 			throw new HotelException(ExceptionMessages.NOTFOUND);
 			
@@ -95,8 +94,8 @@ public class HotelDetailsDaoImpl implements IHotelDetailsDao {
 		String sqlQuery=Queries.MODIFYADDRESS;
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sqlQuery);
-			preparedStatement.setString(1, hotelId);
-			preparedStatement.setString(3, hotelAddress);
+			preparedStatement.setString(2, hotelId);
+			preparedStatement.setString(1, hotelAddress);
 			check=preparedStatement.executeUpdate();
 			if(check==1) {
 				connection.commit();
@@ -116,8 +115,8 @@ public class HotelDetailsDaoImpl implements IHotelDetailsDao {
 		String sqlQuery=Queries.MODIFYROOMS;
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sqlQuery);
-			preparedStatement.setString(1, hotelId);
-			preparedStatement.setInt(4, numOfRooms);
+			preparedStatement.setString(2, hotelId);
+			preparedStatement.setInt(1, numOfRooms);
 			check=preparedStatement.executeUpdate();
 			if(check==1) {
 				connection.commit();
@@ -146,7 +145,7 @@ public class HotelDetailsDaoImpl implements IHotelDetailsDao {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			
-			throw new HotelException(ExceptionMessages.EMPTYLIST);
+			throw new HotelException(ExceptionMessages.DELETELIST);
 		}
 		
 		return false;

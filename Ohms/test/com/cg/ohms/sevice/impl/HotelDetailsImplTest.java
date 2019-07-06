@@ -1,15 +1,10 @@
 package com.cg.ohms.sevice.impl;
 
-import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
 import com.cg.ohms.exceptions.HotelException;
-import com.cg.ohms.exceptions.InValidHotelAddressException;
-import com.cg.ohms.exceptions.InValidHotelIdException;
-import com.cg.ohms.exceptions.InValidHotelNameException;
-import com.cg.ohms.exceptions.InValidNumberOfRoomsException;
 import com.cg.ohms.utility.ValidateHotelDetails;
 
 public class HotelDetailsImplTest {
@@ -18,10 +13,10 @@ public class HotelDetailsImplTest {
 
 	@Test
 	public void testHotelIdValidation() throws HotelException {
-		boolean actual= validation.isValidHotelId("12354");
+		boolean actual= validation.isValidHotelId("123445");
 		assertEquals(true, actual);
 	}
-	@Test(expected = InValidHotelIdException.class)
+	@Test(expected = HotelException.class)
 	public void testForWrongid() throws HotelException {
 		validation.isValidHotelId("1235477556");
 		
@@ -31,7 +26,7 @@ public class HotelDetailsImplTest {
 		boolean actual=validation.isValidHotelName("royalparl");
 		assertEquals(true, actual);
 	}
-	@Test(expected = InValidHotelNameException.class)
+	@Test(expected = HotelException.class)
 	public void testForWrongHotelName() throws HotelException{
 		validation.isValidHotelName("09865546");
 	}
@@ -40,7 +35,7 @@ public class HotelDetailsImplTest {
 		boolean actual=validation.isValidHotelAddress("kakinada,andharpradesh");
 		assertEquals(true, actual);
 	}
-	@Test(expected = InValidHotelAddressException.class)
+	@Test(expected = HotelException.class)
 	public void testForWrongHotelAddress() throws HotelException{
 		validation.isValidHotelAddress("568,/gya,");
 	}
@@ -49,7 +44,7 @@ public class HotelDetailsImplTest {
 		boolean actual=validation.isValidNumberOfRooms(789);
 		assertEquals(true, actual);
 	}
-	@Test(expected = InValidNumberOfRoomsException.class)
+	@Test(expected = HotelException.class)
 	public void testForWrongNumberOfRooms() throws HotelException{
 		validation.isValidNumberOfRooms(467788);
 	}
